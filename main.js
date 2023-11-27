@@ -39,6 +39,8 @@ function handleEachClick(e) {
         clearDisplay();
     } else if (buttonClicked.id === 'equals') {
         handleEqualsButtonClick()
+    } else if (button.className == 'operator') {
+        operatorWasClicked()
     } else {
         display.value += buttonText;
     }
