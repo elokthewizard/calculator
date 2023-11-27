@@ -5,13 +5,15 @@
     justify-content: center;
 }
 
+.row{
+    border: solid green 1px;
+    
+    justify-content: space-between;
+}
+
 button {
     margin: 0.25em;
     aspect-ratio: 1;
     height: 25px
 }
 
-.row{
-    border: solid green 1px;
-    max-width: 200px;
-}

@@ -5,33 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator</title>
     <link rel="stylesheet" href="style.css">
-    <script src="main.js" defer></script>
+    <script src="./main.js" defer></script>
 </head>
 <body>
-    <div class="container" id="Calculator">
-        <span class="display">01134</span>
-        <div class="row">
-            <button>C</button>
-        </div>
-        <div class="row">
-            <button>7</button>
-            <button>8</button>
-            <button>9</button>
-        </div>
-        <div class="row">
-            <button>4</button>
-            <button>5</button>
-            <button>6</button>
-        </div>
-        <div class="row">
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
-        </div>
-        <div class="row">
-            <button>0</button>
-            <button>.</button>
-            <button>=</button>
+    <div class="main">
+        <div class="container" id="Calculator">
+            <input type="text" id="display" placeholder="2 x 2">
+            <div class="row">
+                <button id="clear">C</button>
+                <button id="divide">/</button>
+                <button id="multiply">*</button>
+            </div>
+            <div class="row">
+                <button id="a7">7</button>
+                <button id="a8">8</button>
+                <button id="a9">9</button>
+                <button id="add">+</button>
+            </div>
+            <div class="row">
+                <button id="a4">4</button>
+                <button id="a5">5</button>
+                <button id="a6">6</button>
+                <button id="subtract">-</button>
+            </div>
+            <div class="row">
+                <button id="a1">1</button>
+                <button id="a2">2</button>
+                <button id="a3">3</button>
+            </div>
+            <div class="row">
+                <button id="a0">0</button>
+                <button id="point">.</button>
+                <button id="equals">=</button>
+            </div>
         </div>
     </div>
 </body>
