@@ -17,8 +17,13 @@ const divide = function(a,b) {
 const calculator = document.querySelector('#Calculator');
 const display = document.querySelector('input');
 const button = document.querySelector('button')
+let lastButtonClickedEquals = false;
 
 calculator.addEventListener('click', e => {
+    if (lastButtonClickedEquals){
+        display.value = '';
+        lastButtonClickedEquals = false;
+    }
 
     display.value += e.target.textContent;
 
@@ -53,6 +58,7 @@ calculator.addEventListener('click', e => {
                 console.error("Invalid Operator")
         }
         display.value = result;
+        lastButtonClickedEquals = true;
     
     };
 });
