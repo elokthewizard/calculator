@@ -17,57 +17,75 @@ const divide = function(a,b) {
 const calculator = document.querySelector('#Calculator');
 const display = document.querySelector('input');
 const button = document.querySelector('button')
-let lastButtonClickedEquals = false;
+let lastButtonClickedWasEquals = false;
 let lastResult;
 
+calculator.addEventListener('click', handleEachClick);
 
+function clearDisplay(){
+    display.value = '';
+}
 
-calculator.addEventListener('click', e => {
-    if (lastButtonClickedEquals){
-        display.value = '';
-        lastButtonClickedEquals = false;
+function handleEachClick(e) {
+    const buttonClicked = e.target;
+    const buttonText = buttonClicked.textContent;
+
+    if (lastButtonClickedWasEquals){
+        clearDisplay();
+        lastButtonClickedWasEquals = false;
     }
 
-    display.value += e.target.textContent;
+    if (buttonClicked.id === 'clear'){
+        clearDisplay();
+    } else if (buttonClicked.id === 'equals') {
+        handleEqualsButtonClick()
+    } else {
+        display.value += buttonText;
+    }
+};
 
-    if (e.target.id == "equals"){
-        let expression = display.value
-        let elements = expression.split(/(\D)/);
-        
-        let operand1 = elements[0] === '' ? lastResult : parseInt(elements[0]); // if item here is empty string replace with last result
-        let operand2 = parseInt(elements[2]);
-        let operator = elements[1];
-    
-        let result;
-    
-        switch (operator) {
-            case '+':
-                result = add(operand1,operand2)
-                break;
-            case '-':
-                result = subtract(operand1,operand2)
-                break;
-            case '*':
-                result = multiply(operand1,operand2)
-                break;
-            case "/":
-                result = divide(operand1,operand2)
-                break;
-            default:
-                console.error("Invalid Operator")
-        };
+function parseExpression(expression) {
+    const elements = expression.split(/(\D)/);
+    const operand1 = elements[0] === '' ? lastResult : parseInt(elements[0]);
+    const operand2 = parseInt(elements[2]);
+    const operator = elements[1];
+    return { operand1, operand2, operator};
+}
 
-        lastResult = result;
-        
-        display.value = result;
-        lastButtonClickedEquals = true;
-        
+function handleEqualsButtonClick() {
+    const expression = display.value;
+    const {operand1, operand2, operator} = parseExpression(expression);
+
+    if (isNaN(operand1) || isNaN(operand2)) {
+        console.error("Invalid Operands");
+        return;
+    }
+
+    let result;
+
+    switch (operator) {
+        case '+':
+            result = add(operand1,operand2)
+            break;
+        case '-':
+            result = subtract(operand1,operand2)
+            break;
+        case '*':
+            result = multiply(operand1,operand2)
+            break;
+        case "/":
+            result = divide(operand1,operand2)
+            break;
+        default:
+            console.error("Invalid Operator")
     };
 
-    if (e.target.id == "clear") {
-        display.value = ''
-    }
-});
+    lastResult = result;
+    display.value = result;
+    lastButtonClickedWasEquals = true;
+};
+
+
 
 
 
