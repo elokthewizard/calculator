@@ -18,6 +18,9 @@ const calculator = document.querySelector('#Calculator');
 const display = document.querySelector('input');
 const button = document.querySelector('button')
 let lastButtonClickedEquals = false;
+let lastResult;
+
+
 
 calculator.addEventListener('click', e => {
     if (lastButtonClickedEquals){
@@ -27,15 +30,11 @@ calculator.addEventListener('click', e => {
 
     display.value += e.target.textContent;
 
-    if (e.target.id == "clear") {
-        display.value = ''
-    }
-
     if (e.target.id == "equals"){
         let expression = display.value
         let elements = expression.split(/(\D)/);
         
-        let operand1 = parseInt(elements[0]);
+        let operand1 = elements[0] === '' ? lastResult : parseInt(elements[0]); // if item here is empty string replace with last result
         let operand2 = parseInt(elements[2]);
         let operator = elements[1];
     
@@ -56,12 +55,20 @@ calculator.addEventListener('click', e => {
                 break;
             default:
                 console.error("Invalid Operator")
-        }
+        };
+
+        lastResult = result;
+        
         display.value = result;
         lastButtonClickedEquals = true;
-    
+        
     };
+
+    if (e.target.id == "clear") {
+        display.value = ''
+    }
 });
+
 
 
 
