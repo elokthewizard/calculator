@@ -15,19 +15,19 @@ const divide = function(a,b) {
 };
 
 const calculator = document.querySelector('#Calculator');
-const input = document.querySelector('input');
+const display = document.querySelector('input');
 const button = document.querySelector('button')
 
 calculator.addEventListener('click', e => {
 
-    input.value += e.target.textContent;
+    display.value += e.target.textContent;
 
     if (e.target.id == "clear") {
-        input.value = ''
+        display.value = ''
     }
 
     if (e.target.id == "equals"){
-        let expression = input.value
+        let expression = display.value
         let elements = expression.split(/(\D)/);
         
         let operand1 = parseInt(elements[0]);
@@ -52,7 +52,7 @@ calculator.addEventListener('click', e => {
             default:
                 console.error("Invalid Operator")
         }
-        input.value = result;
+        display.value = result;
     
     };
 });
