@@ -22,6 +22,10 @@ calculator.addEventListener('click', e => {
 
     input.value += e.target.textContent;
 
+    if (e.target.id == "clear") {
+        input.value = ''
+    }
+
     if (e.target.id == "equals"){
         let expression = input.value
         let elements = expression.split(/(\D)/);
