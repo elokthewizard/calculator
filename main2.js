@@ -31,7 +31,7 @@ calculator.addEventListener('click', handleClick);
 
 function handleClick(e) {
     const buttonClicked = e.target;
-    const buttonText = buttonClicked.textContent;;
+    const buttonText = buttonClicked.textContent;
     
     if (buttonClicked.id === ('clear')) {
         console.log('clearing...')
@@ -46,45 +46,37 @@ function handleClick(e) {
         display.value += buttonText;
     }
     if (lastClickWasEquals) {
+        operands = [];
         clearDisplay()
         display.value = result;
         lastClickWasEquals = false;
     }
 };
 
-function clearDisplay() {
-    display.value = '';
-}
-
-function clearData() {
-    clearDisplay();
-    firstOperand = '';
-    secondOperand = '';
-    operator = '';
-    result = '';
-    lastResult = '';
-    operatorWasClicked = false;
-    lastClickWasEquals = false;
-}
-
 function opWasClicked(buttonText) {
-    operatorWasClicked = true;
+    if (lastClickWasEquals) {
+        firstOperand = lastResult;
+        operatorWasClicked = false;
+    }
+    if (operatorWasClicked) {
+        secondOperand = display.value;
+        operands.push(secondOperand);
+        operate();
+    } else {
+        firstOperand = display.value;
+        operands.push(firstOperand);
+        clearDisplay();
+    }
     operator = buttonText;
-    operands.push(display.value)
-    firstOperand = operands[0];
-    clearDisplay();
+    operatorWasClicked = true;
 }
 
 function operate() {
     operands.push(display.value)
-    secondOperand = operands[1];
-    firstOperand = parseFloat(firstOperand);
-    secondOperand = parseFloat(secondOperand);
-    console.log(firstOperand);
-    console.log(secondOperand);
-    console.log(operator);
+    firstOperand = parseFloat(operands[0])
+    secondOperand = parseFloat(operands[1])
 
-    switch (operator) {
+    switch (operator.toString()) {
         case '+':
             result = add(firstOperand,secondOperand)
             break;
@@ -101,8 +93,23 @@ function operate() {
             console.error('Invalid operator')
             return;
     }
-    console.log(result)
     lastResult = result;
     lastClickWasEquals = true;
     operatorWasClicked = false;
+}
+
+function clearDisplay() {
+    display.value = '';
+}
+
+function clearData() {
+    clearDisplay();
+    firstOperand = '';
+    secondOperand = '';
+    operator = '';
+    operands = [];
+    result = '';
+    lastResult = '';
+    operatorWasClicked = false;
+    lastClickWasEquals = false;
 }
