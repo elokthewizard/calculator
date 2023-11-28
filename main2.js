@@ -55,3 +55,35 @@ function opWasClicked(buttonText) {
     firstOperand = operands[0];
     clearDisplay();
 }
+
+function operate() {
+    if (!operatorWasClicked) {
+        console.log('No operator selected')
+    
+    display.value = parseFloat(display.value)
+    return;
+    }
+    firstOperand = parseFloat(firstOperand);
+    secondOperand = parseFloat(display.value);
+
+    switch (operator) {
+        case '+':
+            result = add(firstOperand,secondOperand)
+            break;
+        case '-':
+            result = subtract(firstOperand,secondOperand)
+            break;
+        case '*':
+            result = multiply(firstOperand,secondOperand)
+            break;
+        case '/':
+            result = divide(firstOperand,secondOperand)
+            break;
+        default:
+            console.error('Invalid operator')
+            return;
+    }
+    display.value = result;
+    lastResult = result;
+    operatorWasClicked = false;
+}
