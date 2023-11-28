@@ -11,19 +11,32 @@ const multiply = function(a,b) {
 };
 
 const divide = function(a,b) {
-    return (a/b)
+    return (a / b)
 };
 
 const calculator = document.querySelector('#Calculator');
 const display = document.querySelector('input');
 const button = document.querySelector('button')
 let lastButtonClickedWasEquals = false;
+let anOperatorWasClicked = false;
 let lastResult;
+let firstOperand = '';
+let secondOperand = '';
+let operator = '';
 
-calculator.addEventListener('click', handleEachClick);
+calculator.addEventListener('click', handleEachClick); // listen for click and do stuff when detected
+
+function operatorWasClicked() {
+    if (display.value !== '') {
+        firstOperand = display.value;
+        clearDisplay();
+        console.log("opClickFO " + firstOperand)
+        anOperatorWasClicked = true;
+    }
+}
 
 function clearDisplay(){
-    display.value = '';
+    display.value = ''; // set value of display to empty string when called
 }
 
 function handleEachClick(e) {
@@ -32,70 +45,54 @@ function handleEachClick(e) {
 
     if (lastButtonClickedWasEquals){
         clearDisplay();
-        lastButtonClickedWasEquals = false;
+        lastButtonClickedWasEquals = false; // clear display and set flag back 
     }
 
     if (buttonClicked.id === 'clear'){
         clearDisplay();
+        firstOperand = '';
+        secondOperand = '';
+        operator = '';
+        anOperatorWasClicked = false;
     } else if (buttonClicked.id === 'equals') {
         handleEqualsButtonClick()
-    } else if (button.className == 'operator') {
+    } else if (buttonClicked.className === 'operator') {
+        operator = buttonClicked.textContent;
         operatorWasClicked()
+    } else if (anOperatorWasClicked) {
+        display.value += buttonText
+        secondOperand = display.value;
+        console.log(secondOperand)
+        anOperatorWasClicked = false;
     } else {
         display.value += buttonText;
     }
 };
 
-function parseExpression(expression) {
-    const elements = expression.split(/(\D)/);
-    const operand1 = elements[0] === '' ? lastResult : parseInt(elements[0]);
-    const operand2 = parseInt(elements[2]);
-    const operator = elements[1];
-    return { operand1, operand2, operator};
-}
-
 function handleEqualsButtonClick() {
-    const expression = display.value;
-    const {operand1, operand2, operator} = parseExpression(expression);
-
-    if (isNaN(operand1) || isNaN(operand2)) {
-        console.error("Invalid Operands");
-        return;
-    }
-
+    firstOperand = parseInt(firstOperand);
+    secondOperand = parseInt(secondOperand);
     let result;
 
     switch (operator) {
         case '+':
-            result = add(operand1,operand2)
+            result = add(firstOperand,secondOperand)
             break;
         case '-':
-            result = subtract(operand1,operand2)
+            result = subtract(firstOperand,secondOperand)
             break;
         case '*':
-            result = multiply(operand1,operand2)
+            result = multiply(firstOperand,secondOperand)
             break;
         case "/":
-            result = divide(operand1,operand2)
+            result = divide(firstOperand,secondOperand)
             break;
         default:
             console.error("Invalid Operator")
     };
 
-    lastResult = result;
+    firstOperand = result;
     display.value = result;
     lastButtonClickedWasEquals = true;
 };
 
-
-
-
-
-
-// const operand1 = null
-// const operand2 = null
-// const operator = null
-
-// const operate = function(firstOne, secondOne, operator) {
-//     return (firstOne, operator, secondOne)
-// }
