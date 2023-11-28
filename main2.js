@@ -1,3 +1,19 @@
+const add = function(a,b) {
+    return (a + b);
+};
+
+const subtract = function(a,b) {
+    return (a - b);
+};
+
+const multiply = function(a,b) {
+    return (a * b)
+};
+
+const divide = function(a,b) {
+    return (a / b)
+};
+
 let firstOperand = '';
 let secondOperand = '';
 let operator = '';
@@ -18,17 +34,20 @@ function handleClick(e) {
     const buttonText = buttonClicked.textContent;;
     
     if (buttonClicked.id === ('clear')) {
+        console.log('clearing...')
         clearData();
     } else if (buttonClicked.id === ('equals')) {
+        console.log('calculating...')
         operate();
-        lastClickWasEquals = true;
     } else if (buttonClicked.className === 'operator') {
-        operatorWasClicked();
+        console.log('operator selected...')
+        opWasClicked(buttonText);
     } else {
         display.value += buttonText;
     }
-    if(lastClickWasEquals) {
+    if (lastClickWasEquals) {
         clearDisplay()
+        display.value = result;
         lastClickWasEquals = false;
     }
 };
@@ -49,22 +68,21 @@ function clearData() {
 }
 
 function opWasClicked(buttonText) {
-    operator = buttonText;
     operatorWasClicked = true;
+    operator = buttonText;
     operands.push(display.value)
     firstOperand = operands[0];
     clearDisplay();
 }
 
 function operate() {
-    if (!operatorWasClicked) {
-        console.log('No operator selected')
-    
-    display.value = parseFloat(display.value)
-    return;
-    }
+    operands.push(display.value)
+    secondOperand = operands[1];
     firstOperand = parseFloat(firstOperand);
-    secondOperand = parseFloat(display.value);
+    secondOperand = parseFloat(secondOperand);
+    console.log(firstOperand);
+    console.log(secondOperand);
+    console.log(operator);
 
     switch (operator) {
         case '+':
@@ -83,7 +101,8 @@ function operate() {
             console.error('Invalid operator')
             return;
     }
-    display.value = result;
+    console.log(result)
     lastResult = result;
+    lastClickWasEquals = true;
     operatorWasClicked = false;
 }
