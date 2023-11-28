@@ -101,6 +101,7 @@ function operate() {
     lastResult = result;
     lastClickWasEquals = true;
     operatorWasClicked = false;
+    console.log('lastResult:' + lastResult)
 }
 
 function clearDisplay() {
