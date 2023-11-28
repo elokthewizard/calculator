@@ -32,3 +32,18 @@ function handleClick(e) {
         lastClickWasEquals = false;
     }
 };
+
+function clearDisplay() {
+    display.value = '';
+}
+
+function clearData() {
+    clearDisplay();
+    firstOperand = '';
+    secondOperand = '';
+    operator = '';
+    result = '';
+    lastResult = '';
+    operatorWasClicked = false;
+    lastClickWasEquals = false;
+}
