@@ -31,6 +31,11 @@ calculator.addEventListener('click', handleClick);
 
 function handleClick(e) {
     const buttonClicked = e.target;
+
+    if (buttonClicked.tagName !== 'BUTTON'){
+        return;
+    }
+
     const buttonText = buttonClicked.textContent;
     
     if (buttonClicked.id === ('clear')) {
