@@ -13,3 +13,22 @@ const display = document.querySelector('input');
 
 calculator.addEventListener('click', handleClick);
 
+function handleClick(e) {
+    const buttonClicked = e.target;
+    const buttonText = buttonClicked.textContent;;
+    
+    if (buttonClicked.id === ('clear')) {
+        clearData();
+    } else if (buttonClicked.id === ('equals')) {
+        operate();
+        lastClickWasEquals = true;
+    } else if (buttonClicked.className === 'operator') {
+        operatorWasClicked();
+    } else {
+        display.value += buttonText;
+    }
+    if(lastClickWasEquals) {
+        clearDisplay()
+        lastClickWasEquals = false;
+    }
+};
