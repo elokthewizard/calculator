@@ -47,3 +47,11 @@ function clearData() {
     operatorWasClicked = false;
     lastClickWasEquals = false;
 }
+
+function opWasClicked(buttonText) {
+    operator = buttonText;
+    operatorWasClicked = true;
+    operands.push(display.value)
+    firstOperand = operands[0];
+    clearDisplay();
+}
