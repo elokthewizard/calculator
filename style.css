@@ -6,6 +6,7 @@
 #Calculator{
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
     margin: 0 auto;
     width: 175px;
     border: 10px solid gray;
@@ -16,7 +17,8 @@
 }
 
 button{
-    flex-basis: 1;
+    box-sizing: border-box;
+    flex: 1;
     padding: 4px;
     justify-content: center;
     border: 1px solid black;
