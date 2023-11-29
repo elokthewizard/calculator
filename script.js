@@ -36,15 +36,33 @@ function handleClick(e) {
         display.value += buttonText
     }
     if (buttonClicked.className === 'operator' && display.value !== '') {
-        operator1 = buttonText;
+        if (firstOperand !== '' && operator1 !== '') {
+            secondOperand = display.value;
+
+            // check if operation can be performed
+            if (isValidOperation(firstOperand,secondOperand,operator1)){
+                operate(firstOperand,secondOperand,operator1)
+                operand1 = lastResult;
+                operator2 = buttonText;
+                console.log('new operand/ lastResult is ' + operand1)
+                console.log('operator 2 is: ' + operator2)
+            } else {
+                console.error('Invalid Operation');
+            }
+        } else {
         firstOperand = display.value;
+        console.log(' operand is: ' + firstOperand);
+        operator1 = buttonText;
+        console.log('operator1 is: ' + operator1)
         clearDisplay();
+        }
     }
     if (buttonClicked.id === 'equals') {
         if (firstOperand !== '' && operator1 !== '') {
             secondOperand = display.value;
-            operate();
+            operate(firstOperand,secondOperand,operator1);
         }
+
     }
 }
 
@@ -52,7 +70,7 @@ function clearDisplay() {
     display.value = '';
 }
 
-function operate() {
+function operate(firstOperand,secondOperand,operator) {
     firstOperand = parseFloat(firstOperand);
     secondOperand = parseFloat(secondOperand);
 
@@ -76,4 +94,14 @@ function operate() {
     lastResult = result
     clearDisplay()
     display.value = result;
+}
+
+
+function isValidOperation(firstOperand,secondOperand,operator) {
+    if (operator === '/' && secondOperand === 0) {
+        console.error('cannot divide by zero')
+        return false;
+    } else {
+        return true;
+    }
 }
