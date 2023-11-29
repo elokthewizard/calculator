@@ -13,3 +13,6 @@ const multiply = function(a,b) {
 const divide = function(a,b) {
     return (a / b)
 };
+
+const calculator = document.querySelector('#Calculator');
+const display = document.querySelector('input');
