@@ -32,7 +32,16 @@ function handleClick(e) {
         return; // if we clicked a non button, return nothing
     }; 
     const buttonText = buttonClicked.textContent;
-    if (buttonClicked.className === "number") {
+    if (buttonClicked.className === 'number') {
         display.value += buttonText
     }
+    if (buttonClicked.className === 'operator' && display.value !== '') {
+        operator1 = buttonText;
+        operand1 = display.value;
+        clearDisplay();
+    }
+}
+
+function clearDisplay() {
+    display.value = '';
 }
