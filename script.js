@@ -36,8 +36,13 @@ function handleClick(e) {
     }
     const buttonText = buttonClicked.textContent;
     if (buttonClicked.className === 'number') {
+        if (operator2 != '') {
+            clearDisplay();    
+        }
         display.value += buttonText
+        display.value = display.value.substring(0,9)
     }
+    
     if (buttonClicked.className === 'operator' && display.value !== '') {
         if (firstOperand !== '' && operator1 !== '') {
             secondOperand = display.value;
@@ -61,19 +66,13 @@ function handleClick(e) {
         clearDisplay();
         }
     }
-    if (buttonClicked.className === 'number' && operator2 !== ''){
-        clearDisplay();
-        display.value += buttonText;
-    }
+    
     if (buttonClicked.id === 'equals') {
         if (firstOperand !== '' && operator1 !== '') {
             secondOperand = display.value;
             operate(firstOperand,secondOperand,operator1);
         }
-        if (operator2 !== '') {
-            firstOperand = lastResult;
-            secondOperand = display.value;
-        } 
+        
 
     }
 }
