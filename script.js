@@ -38,13 +38,14 @@ function handleClick(e) {
     if (buttonClicked.className === 'operator' && display.value !== '') {
         if (firstOperand !== '' && operator1 !== '') {
             secondOperand = display.value;
+            console. log('second operand is: ' + secondOperand)
 
             // check if operation can be performed
             if (isValidOperation(firstOperand,secondOperand,operator1)){
                 operate(firstOperand,secondOperand,operator1)
-                operand1 = lastResult;
+                firstOperand = lastResult;
                 operator2 = buttonText;
-                console.log('new operand/ lastResult is ' + operand1)
+                console.log('new operand/ lastResult is ' + firstOperand)
                 console.log('operator 2 is: ' + operator2)
             } else {
                 console.error('Invalid Operation');
@@ -57,11 +58,19 @@ function handleClick(e) {
         clearDisplay();
         }
     }
+    if (buttonClicked.className === 'number' && operator2 !== ''){
+        clearDisplay();
+        display.value += buttonText;
+    }
     if (buttonClicked.id === 'equals') {
         if (firstOperand !== '' && operator1 !== '') {
             secondOperand = display.value;
             operate(firstOperand,secondOperand,operator1);
         }
+        if (operator2 !== '') {
+            firstOperand = lastResult;
+            secondOperand = display.value;
+        } 
 
     }
 }
@@ -74,7 +83,7 @@ function operate(firstOperand,secondOperand,operator) {
     firstOperand = parseFloat(firstOperand);
     secondOperand = parseFloat(secondOperand);
 
-    switch (operator1.toString()) {
+    switch (operator.toString()) {
         case '+':
             result = add(firstOperand,secondOperand)
             break;
