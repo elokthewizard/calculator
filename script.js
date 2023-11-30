@@ -42,6 +42,9 @@ function handleClick(e) {
             display.value += buttonText;
         }
     }
+    if (buttonClicked.id === 'percent') {
+        display.value = (display.value / 100)
+    }
     if (buttonClicked.className === 'number') {
         if (operator2 != '') {
             clearDisplay();    
