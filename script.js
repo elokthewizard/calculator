@@ -82,7 +82,11 @@ function handleClick(e) {
     
     if (buttonClicked.id === 'equals') {
         if (firstOperand !== '' && operator1 !== '') {
+            if (display.value === ''){
+                return false;
+            }
             secondOperand = display.value;
+            console.log('second operand is: ' + secondOperand)
             operate(firstOperand,secondOperand,operator1);
         }
     }
@@ -105,7 +109,8 @@ function initializeData() {
 function operate(firstOperand,secondOperand,operator) {
     firstOperand = parseFloat(firstOperand);
     secondOperand = parseFloat(secondOperand);
-
+    console.log(firstOperand)
+    console.log(secondOperand)
     switch (operator.toString()) {
         case '+':
             result = add(firstOperand,secondOperand)
@@ -123,9 +128,12 @@ function operate(firstOperand,secondOperand,operator) {
             console.error('Invalid operator')
             return;
     }
-    lastResult = result
+    if (result.toString().includes('.')) {
+        lastResult = result.toFixed(2);
+    }
+    lastResult = result;
     clearDisplay()
-    display.value = result;
+    display.value = lastResult;
 }
 
 
