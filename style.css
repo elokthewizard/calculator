@@ -6,20 +6,28 @@
 #Calculator{
     display: flex;
     flex-direction: column;
-    box-sizing: content-box;
     margin: 0 auto;
     width: 180px;
-    border: 10px solid gray;
+    border: 10px solid black;
 }
 
 #display{
     height: 40px;
     font-size: 20px;
+    padding: 2px 8px;
 }
 
 .row{
     display: flex;
     box-sizing: border-box;
+}
+
+.operator, #equals {
+    background-color: #C8D3D5;
+}
+
+#clear, #posOrNeg, #percent{
+    background-color: #818f9c;
 }
 
 button{
@@ -28,10 +36,8 @@ button{
     width: 45px;
     justify-content: center;
     border: 1px solid black;
+    background-color: #fffae3;
 }
-
-
-
 
 #a0{
     width: 90px;
