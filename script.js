@@ -28,13 +28,20 @@ calculator.addEventListener('click', handleClick);
 
 function handleClick(e) {
     const buttonClicked = e.target;
+    const buttonText = buttonClicked.textContent;
     if (buttonClicked.tagName !== 'BUTTON') {
         return; // if we clicked a non button, return nothing
     }; 
     if (buttonClicked.id === 'clear') {
         initializeData();
     }
-    const buttonText = buttonClicked.textContent;
+    if (buttonClicked.id === 'point') {
+        if (display.value.includes('.')) {
+            return false;
+        } else {
+            display.value += buttonText;
+        }
+    }
     if (buttonClicked.className === 'number') {
         if (operator2 != '') {
             clearDisplay();    
@@ -72,8 +79,6 @@ function handleClick(e) {
             secondOperand = display.value;
             operate(firstOperand,secondOperand,operator1);
         }
-        
-
     }
 }
 
