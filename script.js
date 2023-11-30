@@ -31,6 +31,9 @@ function handleClick(e) {
     if (buttonClicked.tagName !== 'BUTTON') {
         return; // if we clicked a non button, return nothing
     }; 
+    if (buttonClicked.id === 'clear') {
+        initializeData();
+    }
     const buttonText = buttonClicked.textContent;
     if (buttonClicked.className === 'number') {
         display.value += buttonText
@@ -77,6 +80,16 @@ function handleClick(e) {
 
 function clearDisplay() {
     display.value = '';
+}
+
+function initializeData() {
+    clearDisplay();
+    firstOperand = '';
+    secondOperand = '';
+    operator1 = '';
+    operator2 = '';
+    result = '';
+    lastResult = '';
 }
 
 function operate(firstOperand,secondOperand,operator) {
